@@ -12,13 +12,41 @@ class Worker < ApplicationRecord
     tasks << task
   end
 
+  def pick_task
+    tasks.queued.first
+  end
+
   def perform
     busy!
-    @task = tasks.queued.first
-    @task.running!
-    @task.call
-    @task.done!
+    task = pick_task
+    task.running!
+    task.call
+    task.done!
     free!
+  end
+
+  # returning data
+
+  def self.data
+    worker_stats = Worker.unscoped.group(:status).count
+    {
+      workers: {
+        free: worker_stats['free'] || 0,
+        busy: worker_stats['busy'] || 0,
+        total: Worker.count
+      }
+    }
+  end
+
+  def data
+    {
+      worker: {
+        id: id,
+        name: name,
+        status: status,
+        completed_tasks: tasks.done.count
+      }
+    }
   end
 
   private
