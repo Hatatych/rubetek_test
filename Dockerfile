@@ -4,6 +4,7 @@ RUN mkdir /rubetek_test
 WORKDIR /rubetek_test
 COPY Gemfile /rubetek_test/Gemfile
 COPY Gemfile.lock /rubetek_test/Gemfile.lock
+RUN gem install bundler:2.0.2
 RUN bundle install
 COPY . /rubetek_test
 
