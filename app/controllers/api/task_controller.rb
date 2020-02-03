@@ -1,5 +1,5 @@
 module Api
-  class TaskController < ApplicationController
+  class TaskController < BaseController
     def status
       default_data
       task = Task.find(params[:task_id])

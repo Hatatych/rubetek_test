@@ -1,5 +1,5 @@
 module Api
-  class WorkerController < ApplicationController
+  class WorkerController < BaseController
     def status
       default_data
       worker = Worker.find(params[:worker_id])

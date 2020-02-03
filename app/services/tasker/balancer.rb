@@ -3,7 +3,6 @@ module Tasker
     def self.start
       loop do
         Task.queued.find_each do |task|
-          sleep 0.2
           worker = Worker.give_free
           next unless worker
 

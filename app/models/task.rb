@@ -42,7 +42,7 @@ class Task < ApplicationRecord
     Worker.all.each(&:free!)
     100.times do
       Task.create(
-        difficulty: (1..10).to_a.sample,
+        difficulty: 10, # (1..10).to_a.sample,
         priority: (1..3).to_a.sample
       )
     end

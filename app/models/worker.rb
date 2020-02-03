@@ -9,6 +9,7 @@ class Worker < ApplicationRecord
   end
 
   def add_task(task)
+    @task = task
     tasks << task
   end
 
@@ -18,7 +19,7 @@ class Worker < ApplicationRecord
 
   def perform
     busy!
-    task = pick_task
+    task = @task
     task.running!
     task.call
     task.done!

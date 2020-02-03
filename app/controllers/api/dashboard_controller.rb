@@ -1,5 +1,5 @@
 module Api
-  class DashboardController < ApplicationController
+  class DashboardController < BaseController
     def status
       default_data
       @data.merge!(Worker.data).merge!(Task.data)
